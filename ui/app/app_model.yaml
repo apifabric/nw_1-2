@@ -1,0 +1,819 @@
+about:
+  date: September 30, 2024 06:12:02
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+entities:
+  Category:
+    columns:
+    - label: ' Category Name_ Column Name*'
+      name: CategoryName_ColumnName
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(8000)
+    - name: Description
+      template: text
+      type: VARCHAR(8000)
+    - name: Id
+      template: integer
+      type: INTEGER
+    - name: Client_id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: CategoryName_ColumnName
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - Id
+    type: Category
+  Customer:
+    columns:
+    - label: ' Company Name*'
+      name: CompanyName
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(8000)
+    - name: ContactName
+      template: text
+      type: VARCHAR(8000)
+    - name: ContactTitle
+      template: text
+      type: VARCHAR(8000)
+    - name: Address
+      template: text
+      type: VARCHAR(8000)
+    - name: City
+      template: text
+      type: VARCHAR(8000)
+    - name: Region
+      template: text
+      type: VARCHAR(8000)
+    - name: PostalCode
+      template: text
+      type: VARCHAR(8000)
+    - name: Country
+      template: text
+      type: VARCHAR(8000)
+    - name: Phone
+      template: text
+      type: VARCHAR(8000)
+    - name: Fax
+      template: text
+      type: VARCHAR(8000)
+    - name: Balance
+      type: DECIMAL
+    - name: CreditLimit
+      type: DECIMAL
+    - default: '0'
+      name: OrderCount
+      template: integer
+      type: INTEGER
+    - default: '0'
+      name: UnpaidOrderCount
+      template: integer
+      type: INTEGER
+    - name: Id
+      required: true
+      template: text
+      type: VARCHAR(8000)
+    - name: Client_id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: CompanyName
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - Id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - CustomerId
+      name: OrderList
+      resource: Order
+    type: Customer
+  CustomerDemographic:
+    columns:
+    - label: ' Id*'
+      name: Id
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(8000)
+    - name: CustomerDesc
+      template: text
+      type: VARCHAR(8000)
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: Id
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - Id
+    type: CustomerDemographic
+  Department:
+    columns:
+    - label: ' Department Name*'
+      name: DepartmentName
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(100)
+    - name: DepartmentId
+      template: integer
+      type: INTEGER
+    - default: '0'
+      name: SecurityLevel
+      template: integer
+      type: INTEGER
+    - name: Id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: DepartmentName
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - Id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - DepartmentId
+      name: DepartmentList
+      resource: Department
+    - direction: tomany
+      fks:
+      - OnLoanDepartmentId
+      name: EmployeeList
+      resource: Employee
+    - direction: tomany
+      fks:
+      - WorksForDepartmentId
+      name: WorksForEmployeeList
+      resource: Employee
+    - direction: toone
+      fks:
+      - DepartmentId
+      name: Department
+      resource: Department
+    type: Department
+  Employee:
+    columns:
+    - label: ' Last Name*'
+      name: LastName
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(8000)
+    - name: OnLoanDepartmentId
+      template: integer
+      type: INTEGER
+    - name: UnionId
+      template: integer
+      type: INTEGER
+    - name: WorksForDepartmentId
+      template: integer
+      type: INTEGER
+    - name: FirstName
+      template: text
+      type: VARCHAR(8000)
+    - name: Title
+      template: text
+      type: VARCHAR(8000)
+    - name: TitleOfCourtesy
+      template: text
+      type: VARCHAR(8000)
+    - name: BirthDate
+      template: text
+      type: VARCHAR(8000)
+    - name: HireDate
+      template: text
+      type: VARCHAR(8000)
+    - name: Address
+      template: text
+      type: VARCHAR(8000)
+    - name: City
+      template: text
+      type: VARCHAR(8000)
+    - name: Region
+      template: text
+      type: VARCHAR(8000)
+    - name: PostalCode
+      template: text
+      type: VARCHAR(8000)
+    - name: Country
+      template: text
+      type: VARCHAR(8000)
+    - name: HomePhone
+      template: text
+      type: VARCHAR(8000)
+    - name: Extension
+      template: text
+      type: VARCHAR(8000)
+    - name: Notes
+      template: text
+      type: VARCHAR(8000)
+    - name: ReportsTo
+      template: integer
+      type: INTEGER
+    - name: PhotoPath
+      template: text
+      type: VARCHAR(8000)
+    - default: Salaried
+      name: EmployeeType
+      template: text
+      type: VARCHAR(16)
+    - name: Salary
+      type: DECIMAL
+    - name: Dues
+      type: DECIMAL
+    - name: Id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: LastName
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - Id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - EmployeeId
+      name: EmployeeAuditList
+      resource: EmployeeAudit
+    - direction: tomany
+      fks:
+      - EmployeeId
+      name: EmployeeTerritoryList
+      resource: EmployeeTerritory
+    - direction: tomany
+      fks:
+      - EmployeeId
+      name: OrderList
+      resource: Order
+    - direction: toone
+      fks:
+      - OnLoanDepartmentId
+      name: OnLoanDepartment
+      resource: Department
+    - direction: toone
+      fks:
+      - UnionId
+      name: Union
+      resource: Union
+    - direction: toone
+      fks:
+      - WorksForDepartmentId
+      name: WorksForDepartment
+      resource: Department
+    type: Employee
+  EmployeeAudit:
+    columns:
+    - label: ' Last Name*'
+      name: LastName
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: EmployeeId
+      template: integer
+      type: INTEGER
+    - name: Title
+      template: text
+      type: VARCHAR
+    - name: Salary
+      type: DECIMAL
+    - name: FirstName
+      template: text
+      type: VARCHAR
+    - name: CreatedOn
+      template: text
+      type: TEXT
+    - name: UpdatedOn
+      template: text
+      type: TEXT
+    - name: CreatedBy
+      template: text
+      type: TEXT
+    - name: UpdatedBy
+      template: text
+      type: TEXT
+    - name: Id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: LastName
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - Id
+    tab_groups:
+    - direction: toone
+      fks:
+      - EmployeeId
+      name: Employee
+      resource: Employee
+    type: EmployeeAudit
+  EmployeeTerritory:
+    columns:
+    - label: ' Id*'
+      name: Id
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(8000)
+    - name: EmployeeId
+      required: true
+      template: integer
+      type: INTEGER
+    - name: TerritoryId
+      template: text
+      type: VARCHAR(8000)
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: Id
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - Id
+    tab_groups:
+    - direction: toone
+      fks:
+      - EmployeeId
+      name: Employee
+      resource: Employee
+    - direction: toone
+      fks:
+      - TerritoryId
+      name: Territory
+      resource: Territory
+    type: EmployeeTerritory
+  Location:
+    columns:
+    - label: ' country*'
+      name: country
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(50)
+    - name: city
+      required: true
+      template: text
+      type: VARCHAR(50)
+    - name: notes
+      template: text
+      type: VARCHAR(256)
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: country
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - country
+    - city
+    tab_groups:
+    - direction: tomany
+      fks:
+      - City
+      - Country
+      name: OrderList
+      resource: Order
+    type: Location
+  Order:
+    columns:
+    - label: ' Ship Name*'
+      name: ShipName
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(8000)
+    - name: CloneFromOrder
+      template: integer
+      type: INTEGER
+    - name: City
+      template: text
+      type: VARCHAR(50)
+    - name: CustomerId
+      required: true
+      template: text
+      type: VARCHAR(8000)
+    - name: EmployeeId
+      required: true
+      template: integer
+      type: INTEGER
+    - name: OrderDate
+      template: text
+      type: VARCHAR(8000)
+    - name: RequiredDate
+      type: DATE
+    - name: ShippedDate
+      template: text
+      type: VARCHAR(8000)
+    - name: ShipVia
+      template: integer
+      type: INTEGER
+    - name: Freight
+      type: DECIMAL
+    - name: ShipAddress
+      template: text
+      type: VARCHAR(8000)
+    - name: ShipCity
+      template: text
+      type: VARCHAR(8000)
+    - name: ShipRegion
+      template: text
+      type: VARCHAR(8000)
+    - name: ShipPostalCode
+      template: text
+      type: VARCHAR(8000)
+    - name: ShipCountry
+      template: text
+      type: VARCHAR(8000)
+    - name: AmountTotal
+      template: currency
+      type: DECIMAL(10, 2)
+    - name: Country
+      template: text
+      type: VARCHAR(50)
+    - default: 'TRUE'
+      name: Ready
+      template: text
+      type: BOOLEAN
+    - default: '0'
+      name: OrderDetailCount
+      template: integer
+      type: INTEGER
+    - name: Id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: ShipName
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - Id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - CloneFromOrder
+      name: OrderList
+      resource: Order
+    - direction: tomany
+      fks:
+      - OrderId
+      name: OrderDetailList
+      resource: OrderDetail
+    - direction: toone
+      fks:
+      - CloneFromOrder
+      name: Order
+      resource: Order
+    - direction: toone
+      fks:
+      - City
+      - Country
+      name: Location
+      resource: Location
+    - direction: toone
+      fks:
+      - CustomerId
+      name: Customer
+      resource: Customer
+    - direction: toone
+      fks:
+      - EmployeeId
+      name: Employee
+      resource: Employee
+    type: Order
+  OrderDetail:
+    columns:
+    - label: ' Id*'
+      name: Id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: OrderId
+      required: true
+      template: integer
+      type: INTEGER
+    - name: ProductId
+      required: true
+      template: integer
+      type: INTEGER
+    - name: UnitPrice
+      type: DECIMAL
+    - default: '1'
+      name: Quantity
+      required: true
+      template: integer
+      type: INTEGER
+    - default: '0'
+      name: Discount
+      template: real
+      type: DOUBLE
+    - name: Amount
+      type: DECIMAL
+    - name: ShippedDate
+      template: text
+      type: VARCHAR(8000)
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: Id
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - Id
+    tab_groups:
+    - direction: toone
+      fks:
+      - OrderId
+      name: Order
+      resource: Order
+    - direction: toone
+      fks:
+      - ProductId
+      name: Product
+      resource: Product
+    type: OrderDetail
+  Product:
+    columns:
+    - label: ' Product Name*'
+      name: ProductName
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(8000)
+    - name: QuantityPerUnit
+      template: text
+      type: VARCHAR(8000)
+    - name: UnitPrice
+      required: true
+      type: DECIMAL
+    - name: UnitsInStock
+      required: true
+      template: integer
+      type: INTEGER
+    - name: UnitsOnOrder
+      required: true
+      template: integer
+      type: INTEGER
+    - name: ReorderLevel
+      required: true
+      template: integer
+      type: INTEGER
+    - name: Id
+      template: integer
+      type: INTEGER
+    - name: SupplierId
+      required: true
+      template: integer
+      type: INTEGER
+    - name: CategoryId
+      required: true
+      template: integer
+      type: INTEGER
+    - name: Discontinued
+      required: true
+      template: integer
+      type: INTEGER
+    - name: UnitsShipped
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: ProductName
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - Id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - ProductId
+      name: OrderDetailList
+      resource: OrderDetail
+    type: Product
+  Region:
+    columns:
+    - label: ' Region Description*'
+      name: RegionDescription
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(8000)
+    - name: Id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: RegionDescription
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - Id
+    type: Region
+  SampleDBVersion:
+    columns:
+    - label: ' Id*'
+      name: Id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: Notes
+      template: text
+      type: VARCHAR(800)
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: Id
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - Id
+    type: SampleDBVersion
+  Shipper:
+    columns:
+    - label: ' Company Name*'
+      name: CompanyName
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(8000)
+    - name: Phone
+      template: text
+      type: VARCHAR(8000)
+    - name: Id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: CompanyName
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - Id
+    type: Shipper
+  Supplier:
+    columns:
+    - label: ' Company Name*'
+      name: CompanyName
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(8000)
+    - name: ContactName
+      template: text
+      type: VARCHAR(8000)
+    - name: ContactTitle
+      template: text
+      type: VARCHAR(8000)
+    - name: Address
+      template: text
+      type: VARCHAR(8000)
+    - name: City
+      template: text
+      type: VARCHAR(8000)
+    - name: Region
+      template: text
+      type: VARCHAR(8000)
+    - name: PostalCode
+      template: text
+      type: VARCHAR(8000)
+    - name: Country
+      template: text
+      type: VARCHAR(8000)
+    - name: Phone
+      template: text
+      type: VARCHAR(8000)
+    - name: Fax
+      template: text
+      type: VARCHAR(8000)
+    - name: HomePage
+      template: text
+      type: VARCHAR(8000)
+    - name: Id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: CompanyName
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - Id
+    type: Supplier
+  Territory:
+    columns:
+    - label: ' Territory Description*'
+      name: TerritoryDescription
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(8000)
+    - name: Id
+      required: true
+      template: text
+      type: VARCHAR(8000)
+    - name: RegionId
+      required: true
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: TerritoryDescription
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - Id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - TerritoryId
+      name: EmployeeTerritoryList
+      resource: EmployeeTerritory
+    type: Territory
+  Union:
+    columns:
+    - label: ' Name*'
+      name: Name
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(80)
+    - name: Id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: Name
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - Id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - UnionId
+      name: EmployeeList
+      resource: Employee
+    type: Union
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    edit_on_mode: dblclick
+    include_translation: false
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    mode: tab
+    pick_style: list
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: false
